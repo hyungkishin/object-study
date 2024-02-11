@@ -119,6 +119,13 @@
 - TicketSeller 와 동일한 방법으로 Audience 의 캡슐화를 개선할 수 있다. 
   - Bag 에 접근하는 모든 로직을 Audience 내부로 감추기 위해 Audience 에 buy 메서드를 추가하고 TicketSeller 의 sellTo 메서드에서 getBag 메서드에 접근하는 부분을 buy 메서드로 옮겨보자.
 
+### Audience 입장에서 자신의 가방 안에 초대장이 들어있는지를 스스로 확인한다.
+- buy method 는 인자로 전달된 Ticket 을 Bag 에 넣은 후 지불된 금액을 반환한다.
+- 외부의 제3자가 자신의 가방을 열어보도록 허용하지 않는다.
+- 외부에서는 더이상 Audience 가 Bag 을 직접 처리하기 때문에 외부에서는 더이상 Audience 클래스에서 getBag 메서드를 제거할 수 있고 결과적으로 Bag 의 존재를 내부로 캡슐화할 수 있게 됐다.
+![img_4.png](img_4.png)
 
+### 1. TicketSeller 입장에서 sellTo 비즈니스로직에선, bag 을 참조하는 일이 없고, audience 의 메서드를 통해서만 위임한다.
+![img_5.png](img_5.png)
 
-
+### 2. TicketSeller 가 Audience 의 인터페이스에만 의존하도록 수정하자. TicketSeller 가 buy 메서드를 호출하도록 코드를 변경하면 된다.
