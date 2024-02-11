@@ -94,3 +94,31 @@
 - Theater 가 Audience 와 TicketSeller 에 관해 너무 세세한 부분까지 알지 못하도록 차단하는것.
 > 다시말해 `자율적인 존재` 가 되게끔 만들면 된다.
 
+### TicketOffice 에 접근하는 코드를 ticketOffice 를 포함하는 TicketSeller 로 이동
+![img_2.png](img_2.png)
+
+### 수정된 Theater 는 이제 어디서도 TicketOffice 에 접근 하지 않는다는 사실이 핵심이다
+![img_1.png](img_1.png)
+
+> ticketSeller 에서 getTicketOffice 메서드가 제거된것이 가장 핵심이다. <br/>
+> 개념적이나 물리적으로 객체 내부의 세부적인 사항을 감추는 것을 우리는 캡슐화 라고 부른다. <br/>
+> 캡슐화를 통해 객체 내부로의 접근을 제한하면 객체와 객체 사이의 결합도를 낮출 수 있기 때문에 설계를 좀 더 쉽게 변경할 수 있게 된다. <br/>
+
+
+> Theater 는 오직 TicketSeller 의 인터페이스(interface) 에만 의존한다. TicketSeller 가 내부에 TicketOffice 인스턴스를 포함하고 있다는 사실은 <br/>
+> 구현 (implementation) 의 영역에 속한다. <br/>
+> 객체를 인터페이스와 구현으로 나누고 인터페이스만을 공개하는 것은 객체 사이의 결합도를 낮추고 변경하기 쉬운 코드를 작성하기 위해 따라야 하는 가장 기본적인 설계 원칙이다. <br/>
+
+### Theater 의 결합도를 낮춘 설계.
+![img_3.png](img_3.png)
+
+### Audience 를 캡슐화 해보자.
+- TicketSeller 다음으로 Audience 도 개선해야한다.
+- TicketSeller 는 Audience 의 getBag 메서드를 호출해서 Audience 내부의 Bag 인스턴스에 직접 접근한다.
+  - Bag 인스턴스에 접근하는 객체가 Theater 에서 TicketSeller 로 바뀌었을 뿐 Audience 는 여전히 자율적인 존재가 아닌 것이다.
+- TicketSeller 와 동일한 방법으로 Audience 의 캡슐화를 개선할 수 있다. 
+  - Bag 에 접근하는 모든 로직을 Audience 내부로 감추기 위해 Audience 에 buy 메서드를 추가하고 TicketSeller 의 sellTo 메서드에서 getBag 메서드에 접근하는 부분을 buy 메서드로 옮겨보자.
+
+
+
+
