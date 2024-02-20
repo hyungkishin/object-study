@@ -3,7 +3,7 @@ package ch2.strategy;
 import ch2.Money;
 import ch2.Screening;
 
-public class AmountDiscountPolicy extends DiscountPolicy {
+public class AmountDiscountPolicy extends DefaultDiscountPolicy {
 
     private Money discountAmount;
 
